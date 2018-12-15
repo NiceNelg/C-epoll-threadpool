@@ -1,6 +1,6 @@
 /******************************************************************************
  *Copyright(C),2010-2011,nicenelg@gmail.com
- *FileName: config.h
+ *FileName: config_array.h
  *Author:nelg
  *Version:v1.0
  *Date:2018-12-11
@@ -9,16 +9,26 @@
  *Function List:
 ******************************************************************************/
 
-#include "config.h"
+#include "config_array.h"
 
 /*所有配置信息*/
-static int *CONFIG;
+static char ***CONFIG;
 
 int 
 conf_init(void)
 {
-    int result = -1;
+    int   result = -1;
     char *conf_file_buff = NULL;
+    char *p = NULL;
+    char *row = NULL;
+    char *r_end = NULL;
+    int   rl = 0;
+    char *sign = NULL;
+    char *s_start = NULL;
+    char *s_end = NULL;
+
+    /*初始化配置信息全局变量*/
+    CONFIG = (char ***)malloc(CONF_TOP_OPTIONS_MAX * sizeof(char **));
 
     /*获取内存空间放置配置文件信息*/
     conf_file_buff = (char *)malloc(CONF_FILE_MAX_SIZE);
@@ -34,11 +44,29 @@ conf_init(void)
     if(result != 0) {
         /*读取文件错误*/
         goto CONF_INIT_EXIT;
-        return result;
     }
+    p = conf_file_buff;
     printf("%s\n", conf_file_buff);
+    return result;
     while(*conf_file_buff != EOF) {
-        strstr();
+        *r_end = strstr(conf_file_buff, "\n");
+        if(r_end == NULL) {
+            r_end = strstr(conf_file_buff, EOF);        
+        }
+        if(r_end == NULL) {
+            break;
+        }
+        rl = r_end - conf_file_buff;
+        row = (char *)malloc((r_end - conf_file_buff) * sizeof(char));
+        memcpy(row, conf_file_buff, rl);
+
+        if(!(s_start = strstr(row, '[') && s_end = strstr(row, ']'))) {
+            free(row);
+            row = NULL;
+            continue;
+        }
+        memcpy(sign, s_start+1, s_end -s_start-2);
+        
     }
 
 CONF_INIT_EXIT:

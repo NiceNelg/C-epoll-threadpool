@@ -13,10 +13,10 @@
 #define _CONFIG_ARRAY_H_INCLUDED_
 
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 #include "file_operations.h"
 
-#define CONF_FILE "config.ini"
+#define CONF_FILE "ini.ini"
 #define CONF_FILE_MAX_SIZE (10 * 1024)
 
 /*配置项类型*/

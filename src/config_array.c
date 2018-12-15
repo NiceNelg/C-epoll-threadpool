@@ -19,6 +19,7 @@ conf_init(void)
 {
     int   result = -1;
     char *conf_file_buff = NULL;
+    int   file_length = 0;
     char *p = NULL;
     char *row = NULL;
     char *r_end = NULL;
@@ -26,6 +27,7 @@ conf_init(void)
     char *sign = NULL;
     char *s_start = NULL;
     char *s_end = NULL;
+    int   i = 0;
 
     /*初始化配置信息全局变量*/
     CONFIG = (char ***)malloc(CONF_TOP_OPTIONS_MAX * sizeof(char **));
@@ -46,27 +48,35 @@ conf_init(void)
         goto CONF_INIT_EXIT;
     }
     p = conf_file_buff;
-    printf("%s\n", conf_file_buff);
-    return result;
+    file_length = strlen(conf_file_buff);
+
     while(*conf_file_buff != EOF) {
-        *r_end = strstr(conf_file_buff, "\n");
+        r_end = strstr(conf_file_buff, "\n");
         if(r_end == NULL) {
-            r_end = strstr(conf_file_buff, EOF);        
+            r_end = p+file_length;        
         }
         if(r_end == NULL) {
             break;
         }
         rl = r_end - conf_file_buff;
-        row = (char *)malloc((r_end - conf_file_buff) * sizeof(char));
+        row = (char *)malloc((r_end - conf_file_buff ) * sizeof(char));
         memcpy(row, conf_file_buff, rl);
-
-        if(!(s_start = strstr(row, '[') && s_end = strstr(row, ']'))) {
+        s_end = strstr(row, "\n");
+        if(!((s_start = strstr(row, "[")) && (s_end = strstr(row, "]")))) {
             free(row);
             row = NULL;
             continue;
         }
-        memcpy(sign, s_start+1, s_end -s_start-2);
-        
+        sign = (char *)malloc((s_end-s_start-1) * sizeof(char));
+        memcpy(sign, s_start+1, s_end -s_start-1);
+        for(i=0;i<CONF_TOP_OPTIONS_MAX;i++) {
+           if(strcmp(_CONF_OPTIONS[i],sign) == 0) {
+               if(strstr(_CONF_OPTIONS[i], "\0") != NULL) {
+                   printf("%s\n", _CONF_OPTIONS[i]);
+               }
+                  
+           }
+        }
     }
 
 CONF_INIT_EXIT:

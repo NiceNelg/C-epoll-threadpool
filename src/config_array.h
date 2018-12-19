@@ -72,7 +72,11 @@ static char *_CONF_OPTIONS_VAL[CONF_TOP_OPTIONS_MAX][CONF_OPTIONS_MAX] = {
 
 /*指针偏移一位操作*/
 #define conf_point_offset(p, m_end) (p==m_end) ? p : p+1;
-
+/*指针释放*/
+#define conf_point_free(p) do{                                                \
+    free(p);                                                                  \
+    p = NULL;                                                                 \
+}while(0)
 /******************************************************************************
  *
  * Function name: conf_init

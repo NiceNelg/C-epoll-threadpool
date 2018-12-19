@@ -17,15 +17,23 @@ static char ***CONFIG;
 int 
 conf_init(void)
 {
-    int    result=-1;
-    char  *conf_file_buff=NULL, *file_end=NULL, *reset=NULL;
-    int    file_length=0;
-    char  *row=NULL, *r_end=NULL;
+    int    result = -1;
+    char  *conf_file_buff = NULL;
+    char  *file_end = NULL;
+    char  *reset = NULL;
+    int    file_length = 0;
+    char  *row = NULL;
+    char  *r_end = NULL;
     int    rl=0;
-    char  *sign=NULL, *s_start=NULL, *s_end=NULL;
-    int    i=0, go_on=1, options=0, j=0;
-    char  *options_reset=NULL;
-    char **options_val=NULL;
+    char  *sign = NULL;
+    char  *s_start = NULL;
+    char  *s_end = NULL;
+    int    i=0;
+    int    go_on = 1;
+    int    options = 0;
+    int    j = 0;
+    char  *options_reset = NULL;
+    char **options_val = NULL;
 
     /*初始化配置信息全局变量*/
     CONFIG = (char ***)malloc(CONF_TOP_OPTIONS_MAX * sizeof(char **));
@@ -69,13 +77,11 @@ conf_init(void)
             go_on = 0;
         }
         if(conf_file_buff == file_end) {
-            free(row);
-            row = NULL;
+            conf_point_free(row);
             break;
         }
         if(!go_on) {
-            free(row);
-            row = NULL;
+            conf_point_free(row);
             continue;
         }
 
@@ -88,8 +94,7 @@ conf_init(void)
            if(strcmp(_CONF_OPTIONS[i],sign) != 0) {
                continue;
            }
-           free(sign);
-           sign = NULL;
+           conf_point_free(sign);
            /*计算有多少个配置项*/
            options = 0;
            go_on = 1;
@@ -114,8 +119,7 @@ conf_init(void)
                }else if(strstr(row, "[") && strstr(row, "]")) {
                    go_on = 0;
                }
-               free(row);
-               row = NULL;
+               conf_point_free(row);
                conf_file_buff = conf_point_offset(r_end, file_end);
                if(!go_on) {
                    break;
@@ -155,8 +159,7 @@ conf_init(void)
                    go_on = 0;
                }
                if(!go_on) {
-                   free(row);
-                   row = NULL;
+                   conf_point_free(row);
                    conf_file_buff = conf_point_offset(r_end, file_end);
                    if(go_on == 0) {
                        continue;
@@ -181,23 +184,19 @@ conf_init(void)
                    memcpy(CONFIG[i][j], s_end+1, (rl-(s_end-row)+1));
                    break;
                }
-               free(sign);
-               sign = NULL;
-               free(row);
-               row = NULL;
+               conf_point_free(sign);
+               conf_point_free(row);
                conf_file_buff = conf_point_offset(r_end, file_end);
            }
            break;
         }
         if(sign) {
-            free(sign);
-            sign = NULL;
+            conf_point_free(sign);
         }
     }
     printf("%s\n", CONFIG[CONF_MYSQL][CONF_MYSQL_HOST]);
 CONF_INIT_EXIT:
-    free(reset);
-    reset = NULL;
+    conf_point_free(reset);
     conf_file_buff = NULL;
     return result;
 }

@@ -148,7 +148,7 @@ conf_init(void)
                    continue;
                }
                rl = r_end - conf_file_buff;
-               row = (char *)malloc((rl+1) * sizeof(char));
+               row = (char *)malloc(rl * sizeof(char));
                memcpy(row, conf_file_buff, rl);
                row[rl] = '\0';
                if(strstr(row, "=")) {

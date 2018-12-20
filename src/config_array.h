@@ -1,12 +1,28 @@
 /******************************************************************************
- *Copyright(C),2010-2011,nicenelg@gmail.com
- *FileName: config_array.h
- *Author:nelg
- *Version:v1.0
- *Date:2018-12-11
- *Description: 获取配置文件
- *Others:
- *Function List:
+ * Copyright(C),2010-2011,nicenelg@gmail.com
+ * FileName: config_array.h
+ * Author:nelg
+ * Version:v1.0
+ * Date:2018-12-11
+ * Description: 
+ *  功能：
+ *      1、读取配置文件信息，将配置项放置到全局变量CONFIG中。
+ *  缺点：
+ *      1、很多
+ *      2、需要重定义各配置项的枚举值、最大数以及配置项的索引信息。
+ *      3、当读取的配置信息不存在时，会因指针操作越界导致程序崩溃，因此规定了
+ *         配置文件的信息一定要完整定义及填写。
+ *  优点：
+ *      1、读取配置信息时以数组形式读取，较快速。适用于读取配置信息频繁的程序。
+ * Others:
+ * Function List:
+ *      1、conf_init
+ *      2、conf_get_option_val
+ *      3、conf_get_options
+ *      4、conf_free
+ * Dependent:
+ *      1、str_operations.h str_operations.c
+ *      2、file_operations.h file_operations.c
 ******************************************************************************/
 
 #ifndef _CONFIG_ARRAY_H_INCLUDED_

@@ -20,10 +20,12 @@
 #define CONF_TOP_OPTIONS_MAX 3
 #define CONF_OPTIONS_MAX 5
 
-/*配置项类型*/
+/*配置项下标类型*/
 typedef int conf_opt;
 /*配置项值类型*/
-typedef char* conf_val; 
+typedef char* conf_val;
+/*配置项类型*/
+typedef char** conf_options;
 
 /*顶级配置项*/
 static enum {
@@ -77,6 +79,7 @@ static char *_CONF_OPTIONS_VAL[CONF_TOP_OPTIONS_MAX][CONF_OPTIONS_MAX] = {
     free(p);                                                                  \
     p = NULL;                                                                 \
 }while(0)
+
 /******************************************************************************
  *
  * Function name: conf_init
@@ -95,11 +98,11 @@ int conf_init();
  *   @val       配置项的值         
  *   @config    顶级配置项
  *   @option    子级配置项
- * Return: 
- * 	 0      success  
- *   other  fail
+ * Return:
+ *   char_val   指针地址
+ *   NULL       失败
 ******************************************************************************/
-int conf_get_option_val(conf_val val, conf_opt config, conf_opt options);
+conf_val conf_get_option_val(conf_opt config, conf_opt options);
 
 /******************************************************************************
  *
@@ -108,11 +111,17 @@ int conf_get_option_val(conf_val val, conf_opt config, conf_opt options);
  * Parameter:
  *   @val       配置项的值         
  *   @config    顶级配置项
- * Return: 
- * 	 0      success  
- *   other  fail
+ * Return:
+ *   char_options   指针地址
+ *   NULL           失败
 ******************************************************************************/
-int conf_get_options(conf_val val, conf_opt config);
+conf_options conf_get_options(conf_opt config);
 
+/******************************************************************************
+ *
+ * Function name: conf_free
+ * Description: 释放配置内存
+******************************************************************************/
+void conf_free();
 
 #endif

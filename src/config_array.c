@@ -13,6 +13,8 @@
 
 /*所有配置信息*/
 static char ***CONFIG;
+/*协助配置信息指针释放的数组*/
+static int _CONFIG[CONF_TOP_OPTIONS_MAX];
 
 int 
 conf_init(void)
@@ -37,6 +39,9 @@ conf_init(void)
 
     /*初始化配置信息全局变量*/
     CONFIG = (char ***)malloc(CONF_TOP_OPTIONS_MAX * sizeof(char **));
+    for(i=0; i<CONF_TOP_OPTIONS_MAX; i++) {
+        _CONFIG[i] = 0;
+    }
 
     /*获取内存空间放置配置文件信息*/
     conf_file_buff = (char *)malloc(CONF_FILE_MAX_SIZE);
@@ -129,6 +134,7 @@ conf_init(void)
            if(!options) {
                break;
            }
+           _CONFIG[i] = options;
            /*重置内存地址，读取配置*/
            conf_file_buff = options_reset;
            /*分配内存空间*/
@@ -194,16 +200,32 @@ conf_init(void)
             conf_point_free(sign);
         }
     }
-    printf("%s\n", CONFIG[CONF_MYSQL][CONF_MYSQL_HOST]);
+    result = 0;
 CONF_INIT_EXIT:
     conf_point_free(reset);
     conf_file_buff = NULL;
     return result;
 }
 
-int
-conf_get_option_val(conf_val val, conf_opt config, conf_opt options)
+conf_val
+conf_get_option_val(conf_opt config, conf_opt options)
 {
-    //*val = CONFIG[config][options];
-    return 0;
+    return CONFIG[config][options];
+}
+
+conf_options
+conf_get_options(conf_opt config)
+{
+    return CONFIG[config];
+}
+
+void
+conf_free()
+{
+    int i=0, j;
+    for(i=0; i<CONF_TOP_OPTIONS_MAX; i++) {
+        for(j=0; j<_CONFIG[i]; j++ ) {
+            free(CONFIG[i][j]);
+        }
+    }
 }

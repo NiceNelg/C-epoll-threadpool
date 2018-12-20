@@ -1,2 +1,2 @@
-/src/*.out
-/src/*.o
+src/*.out
+src/*.o

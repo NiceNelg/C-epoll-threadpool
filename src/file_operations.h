@@ -1,5 +1,5 @@
 /******************************************************************************
- *Copyright(C),2010-2011,nicenelg@gmail.com
+ *Copyright(C),2018-2018,nicenelg@gmail.com
  *FileName: file_operations.h
  *Author:nelg
  *Version:v1.0

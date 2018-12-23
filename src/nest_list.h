@@ -13,11 +13,12 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
 
 typedef struct nest_nd nest_node;
 typedef struct nest_ls nest_list;
 
-typedef void (*nest_free_node)(void *data);
+typedef void (*nest_free_data)(void *data);
 
 /*链表节点*/
 struct nest_nd{
@@ -25,7 +26,7 @@ struct nest_nd{
     nest_node        *next;
     nest_list        *list;
     void             *data;
-    nest_free_node    free_data;
+    nest_free_data    free_data;
 };
 
 /*链表结构*/
@@ -64,7 +65,7 @@ uint8_t nest_create_list(nest_list **list);
  * 	 0 success
  *   other fail
 ******************************************************************************/
-uint8_t nest_add_node(nest_list *list, void *data, nest_free_node *function, 
+uint8_t nest_add_node(nest_list *list, void *data, nest_free_data function, 
             uint8_t direction, nest_node *postion);
 
 /******************************************************************************
@@ -116,6 +117,6 @@ nest_node *nest_foreach_list(nest_list *list);
  * 	 0 success
  *   other fail
 ******************************************************************************/
-uint8_t nest_destory_list(nest_list *list);
+uint8_t nest_destroy_list(nest_list *list);
 
 #endif

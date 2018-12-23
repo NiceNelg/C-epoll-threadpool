@@ -15,7 +15,7 @@ nest_create_list(nest_list **list)
 }
 
 uint8_t
-nest_add_node(nest *list, void *data, nest_free_node *function, 
+nest_add_node(nest_list *list, void *data, nest_free_data function, 
             uint8_t direction, nest_node *postion)
 {
     nest_node *node = NULL;
@@ -34,7 +34,7 @@ nest_add_node(nest *list, void *data, nest_free_node *function,
     }
     node->prev = NULL;
     node->next = NULL;
-    node->nest_list = NULL;
+    node->list = NULL;
     node->data = data;
     node->free_data = function;
 
@@ -49,14 +49,14 @@ nest_add_node(nest *list, void *data, nest_free_node *function,
     
     if(direction == 0) {
         /*向前插入节点*/
-        if(postion == list->header) {
-            node->next = list->header;
-            list->header->prev = node;
-            list->header = postion;
-        } else {
-            node->prev = pos->prev;
-            node->next = pos;
-            pos->prev = node;
+        node->prev = pos->prev;
+        node->next = pos;
+        if(pos->prev != NULL) {
+            pos->prev->next = node;
+        }
+        pos->prev = node;
+        if(pos == list->header) {
+            list->header = node;
         }
     } else {
         /*向后插入节点*/
@@ -81,8 +81,8 @@ nest_del_node(nest_list *list, nest_node *node)
     if(node == NULL) {
         return 1;
     }
-    if(node->nest_free_node != NULL) {
-        nest_free_node(node->data);
+    if(node->free_data != NULL) {
+        node->free_data(node->data);
     } else {
         free(node->data);
     }
@@ -105,8 +105,8 @@ nest_del_node(nest_list *list, nest_node *node)
     node->next = NULL;
 
     /*递归销毁子链表*/
-    if(node->nest_list != NULL) {
-        nest_destroy_list(node->nest_list);
+    if(node->list != NULL) {
+        nest_destroy_list(node->list);
     }
     free(node);
     node = NULL;
@@ -116,6 +116,9 @@ nest_del_node(nest_list *list, nest_node *node)
 void 
 nest_reset_cursor(nest_list *list)
 {
+    if(list == NULL) {
+        return ;
+    }
     list->cursor = list->header;
 }
 
@@ -124,6 +127,9 @@ nest_foreach_list(nest_list *list)
 {
     nest_node *node;
 
+    if(list == NULL) {
+        return NULL;
+    }
     node = list->cursor;
     if(list->cursor != NULL) {
         list->cursor = list->cursor->next;
@@ -132,12 +138,17 @@ nest_foreach_list(nest_list *list)
 }
 
 uint8_t
-nest_destory_list(nest_list *list)
+nest_destroy_list(nest_list *list)
 {
     nest_node *node;
     nest_reset_cursor(list);
     while(node = nest_foreach_list(list)) {
-        nest_del_node(node);
+        nest_del_node(list, node);
     }
+    list->header = NULL;
+    list->last = NULL;
+    list->cursor = NULL;
+    list->length = 0;
+    free(list);
     return 0;
 }

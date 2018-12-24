@@ -87,10 +87,12 @@ nest_del_node(nest_list *list, nest_node *node)
         free(node->data);
     }
     list->cursor = node->next;
-    if(list->header == node) {
+    if(list->header == node && list->last == node) {
         list->header = node->next;
-    }
-    if(list->last == node) {
+        list->last = node->next;
+    }else if(list->header == node) {
+        list->header = node->next;
+    }else if(list->last == node) {
         list->last = node->prev;
     }
     list->length--;
@@ -150,5 +152,6 @@ nest_destroy_list(nest_list *list)
     list->cursor = NULL;
     list->length = 0;
     free(list);
+    list = NULL;
     return 0;
 }

@@ -4,7 +4,7 @@
 static nest_list *_CONFIG;
 
 int 
-conf_init(/*void*/)
+conf_init(void)
 {
     uint8_t    result = 1;
     char      *conf_file_buff = NULL;
@@ -247,7 +247,7 @@ conf_get_options(conf_key config)
 }
 
 void
-conf_free(/*void*/)
+conf_free(void)
 {
     nest_destroy_list(_CONFIG);
 }

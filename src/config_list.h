@@ -102,6 +102,6 @@ nest_list *conf_get_options(conf_key config);
  * Function name: conf_free
  * Description: 释放配置内存
 ******************************************************************************/
-void conf_free();
+void conf_free(/*void*/);
 
 #endif

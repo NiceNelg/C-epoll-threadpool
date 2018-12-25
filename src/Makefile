@@ -11,4 +11,4 @@ str_operations.o:str_operations.h
 file_operations.o:file_operations.h
 	gcc -c file_operations.c
 clear:
-	rm *.o
+	rm *.o a.out

@@ -46,7 +46,6 @@ conf_init(/*void*/)
     reset = conf_file_buff;
     /*获取文本结束地址*/
     file_end = conf_file_buff + (strlen(conf_file_buff)- 1);
-    int i = 0;
     /*单行读取*/
     while(conf_file_buff != file_end) {
         go_on = 0;
@@ -248,7 +247,7 @@ conf_get_options(conf_key config)
 }
 
 void
-conf_free()
+conf_free(/*void*/)
 {
     nest_destroy_list(_CONFIG);
 }

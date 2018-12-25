@@ -96,9 +96,9 @@ nest_del_node(nest_list *list, nest_node *node)
         return 1;
     }
     if(node->free_data != NULL) {
-        node->free_data(node->data);
+        node->free_data(&(node->data));
     } else {
-        free(node->data);
+        free(&(node->data));
     }
     list->cursor = node->next;
     if(list->header == node && list->last == node) {

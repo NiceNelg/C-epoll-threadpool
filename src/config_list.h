@@ -50,57 +50,74 @@ typedef struct {
 /******************************************************************************
  *
  * Function name: conf_init
- * Description: 初始化配置
+ * Description:
+ *      初始化配置
  * Return: 
- * 	 0      success  
- *   other  fail
+ * 	    0      success  
+ *      other  fail
 ******************************************************************************/
 int conf_init(void);
 
 /******************************************************************************
  *
  * Function name: conf_create_data
- * Description: 获取子级配置的值
+ * Description:
+ *      设置一个配置配置
  * Parameter:
  *      @conf_data **data   配置数据
  *      @conf_key    key    配置键
  *      @conf_value  value  配置值
  * Return:
- *   0      success
- *   other  fail
+ *      0      success
+ *      other  fail
 ******************************************************************************/
 uint8_t conf_create_data(conf_data **data, conf_key key, conf_val value);
 
+/******************************************************************************
+ *
+ * Function name: conf_free_data
+ * Description:
+ *      释放单个配置数据
+ * Parameter:
+ *      @conf_data **data   配置数据
+ * Return:
+ *      0      success
+ *      other  fail
+******************************************************************************/
+void conf_free_data(void **data);
 
 /******************************************************************************
  *
  * Function name: conf_get_option_val
- * Description: 获取子级配置的值
+ * Description:
+ *      获取子级配置的值
  * Parameter:     
- *   @conf_key config     顶级配置项
- *   @conf_key options    子级配置项
+ *      @conf_key config     顶级配置项
+ *      @conf_key options    子级配置项
  * Return:
- *   char_val   指针地址
- *   NULL       fail
+ *      char_val   指针地址
+ *      NULL       fail
 ******************************************************************************/
 conf_val conf_get_option_val(conf_key config, conf_key options);
 
 /******************************************************************************
  *
  * Function name: conf_get_options
- * Description: 获取对应顶级配置的所有子级配置项
+ * Description:
+ *      获取对应顶级配置的所有子级配置项
  * Parameter:
- *   @conf_key config    顶级配置项
+ *      @conf_key config    顶级配置项
  * Return:
- *   nest_lisit   链表地址
- *   NULL         fail
+ *      nest_lisit   链表地址
+ *      NULL         fail
 ******************************************************************************/
 nest_list *conf_get_options(conf_key config);
 
 /******************************************************************************
  *
  * Function name: conf_free
- * Description: 释放配置内存
+ * Description:
+ *      释放配置内存
 ******************************************************************************/
 void conf_free(void);
 

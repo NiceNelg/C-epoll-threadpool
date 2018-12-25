@@ -18,7 +18,7 @@
 typedef struct nest_nd nest_node;
 typedef struct nest_ls nest_list;
 
-typedef void (*nest_free_data)(void *data);
+typedef void (*nest_free_data)(void **data);
 
 /*Á´±í½Úµã*/
 struct nest_nd{

@@ -89,7 +89,8 @@ conf_init(void)
                 conf_point_free(sign);
                 goto CONF_INIT_EXIT;
             }
-            result = nest_add_node(_CONFIG, (void *)data, NULL, 1, NULL);
+            result = nest_add_node(_CONFIG, (void *)data, conf_free_data,
+                        1, NULL);
             if(result) {
                 nest_destroy_list(_CONFIG);
                 conf_point_free(sign);
@@ -158,8 +159,8 @@ conf_init(void)
                     conf_point_free(option_val);
                     goto CONF_INIT_EXIT;
                 }
-                result = nest_add_node(cursor->list, (void *)data, NULL, 1, 
-                            NULL);
+                result = nest_add_node(cursor->list, (void *)data, 
+                            conf_free_data, 1, NULL);
                 if(result) {
                     nest_destroy_list(_CONFIG);
                     conf_point_free(sign);
@@ -210,6 +211,19 @@ conf_create_data(conf_data **data, conf_key key, conf_val value)
     (*data)->key = key;
     (*data)->value = value;
     return 0;
+}
+
+void
+conf_free_data(void **data)
+{
+    free(((conf_data *)*data)->key);
+    ((conf_data *)*data)->key = NULL;
+    if(((conf_data *)*data)->value != NULL) {
+        free(((conf_data *)*data)->value);
+    }
+    ((conf_data *)*data)->value = NULL;
+    free(*data);
+    *data = NULL;
 }
 
 conf_val

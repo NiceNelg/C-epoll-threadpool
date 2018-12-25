@@ -10,10 +10,8 @@ conf_init(/*void*/)
     char      *conf_file_buff = NULL;
     char      *file_end = NULL;
     char      *reset = NULL;
-    size_t     file_length = 0;
     char      *row = NULL;
     char      *r_end = NULL;
-    size_t     rl = 0;
     char      *sign = NULL;
     char      *s_start = NULL;
     char      *s_end = NULL;
@@ -46,9 +44,8 @@ conf_init(/*void*/)
         goto CONF_INIT_EXIT;
     }
     reset = conf_file_buff;
-    /*计算文本长度*/
-    file_length = strlen(conf_file_buff);
-    file_end = conf_file_buff + (file_length - 1);
+    /*获取文本结束地址*/
+    file_end = conf_file_buff + (strlen(conf_file_buff)- 1);
     int i = 0;
     /*单行读取*/
     while(conf_file_buff != file_end) {
@@ -58,10 +55,7 @@ conf_init(/*void*/)
             break;
         }
         /*复制当前行*/
-        rl = r_end - conf_file_buff + 1;
-        row = (char *)malloc(rl * sizeof(char));
-        memcpy(row, conf_file_buff, rl);
-        row[rl-1] = '\0';
+        stropt_memcpy(&row, conf_file_buff, (r_end-1));
         /*指针偏移*/
         conf_file_buff = conf_point_offset(r_end, file_end);
         /*判断标志位*/
@@ -80,10 +74,7 @@ conf_init(/*void*/)
         }
 
         /*获取标志位*/
-        rl = s_end - s_start;
-        sign = (char *)malloc(rl * sizeof(char));
-        memcpy(sign, s_start+1, rl); 
-        sign[rl-1] = '\0';
+        stropt_memcpy(&sign, (s_start+1), (s_end-1));        
         conf_point_free(row);
         /*记录标志位*/
         nest_reset_cursor(_CONFIG);
@@ -127,15 +118,10 @@ conf_init(/*void*/)
                 conf_file_buff = conf_point_offset(r_end, file_end);
                 continue;
             }
-            rl = r_end - conf_file_buff + 1;
-            row = (char *)malloc(rl * sizeof(char));
-            memcpy(row, conf_file_buff, rl);
-            row[rl-1] = '\0';
+            stropt_memcpy(&row, conf_file_buff, (r_end-1));
             if(strstr(row, "=")) {
                 /*去除空格*/
                 stropt_del_chr(row, (char)' ');
-                /*重置行长度*/
-                rl = strlen(row);
             }else if(strstr(row, "[") && strstr(row, "]")) {
                 go_on = 1;
             }else {
@@ -152,11 +138,9 @@ conf_init(/*void*/)
             }
             conf_file_buff = conf_point_offset(r_end, file_end);
             s_end = strstr(row, "=");
-            sign = (char *)malloc((s_end - row) * sizeof(char));
-            memcpy(sign, row, (s_end - row));
-            option_val = (char *)malloc((rl-(s_end-row)-1) * sizeof(char));
-            memcpy(option_val, s_end+1, (rl-(s_end-row)-1));
-            option_val[rl-(s_end-row)-1] = '\0';
+            stropt_memcpy(&sign, row, (s_end-1));
+            stropt_memcpy(&option_val, (s_end+1), (row + strlen(row) -1));
+            conf_point_free(row);
             /*查找配置项key*/
             if(cursor->list == NULL) {
                 nest_create_list(&(cursor->list));
@@ -172,6 +156,7 @@ conf_init(/*void*/)
                 if(result) {
                     nest_destroy_list(_CONFIG);
                     conf_point_free(sign);
+                    conf_point_free(option_val);
                     goto CONF_INIT_EXIT;
                 }
                 result = nest_add_node(cursor->list, (void *)data, NULL, 1, 
@@ -179,6 +164,7 @@ conf_init(/*void*/)
                 if(result) {
                     nest_destroy_list(_CONFIG);
                     conf_point_free(sign);
+                    conf_point_free(option_val);
                     goto CONF_INIT_EXIT;
                 }
                 /*查找节点*/
@@ -250,16 +236,19 @@ conf_get_option_val(conf_key config, conf_key options)
 nest_list*
 conf_get_options(conf_key config)
 {
+    nest_node *conf;
+    nest_reset_cursor(_CONFIG);
+    while(conf = nest_foreach_list(_CONFIG)) {
+        if(strcmp(((conf_data *)conf->data)->key, config) != 0) {
+            continue;
+        }
+        return conf->list; 
+    }
     return NULL;
 }
 
-//void
-//conf_free()
-//{
-//    int i=0, j;
-//    for(i=0; i<CONF_TOP_OPTIONS_MAX; i++) {
-//        for(j=0; j<_CONFIG[i]; j++ ) {
-//            free(CONFIG[i][j]);
-//        }
-//    }
-//}
+void
+conf_free()
+{
+    nest_destroy_list(_CONFIG);
+}

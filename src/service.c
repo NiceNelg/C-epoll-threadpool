@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "config_list.h"
 
-
 int 
 main()
 {
@@ -10,8 +9,11 @@ main()
         exit(-1);
     }
     conf_val mysql_host;
-    mysql_host = conf_get_option_val("mysql", "port");
+    mysql_host = conf_get_option_val("service", "host");
     printf("%s\n", mysql_host);
-    //conf_free();
+    nest_list *mysql_c;
+    mysql_c = conf_get_options("mysql");
+    printf("%s\n", ((conf_data *)mysql_c->header->data)->value);
+    conf_free();
     return 0;
 }

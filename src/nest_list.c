@@ -75,6 +75,20 @@ nest_add_node(nest_list *list, void *data, nest_free_data function,
     return 0;
 }
 
+nest_node*
+nest_find_node(nest_list *list, void *data)
+{
+    nest_node *cursor;
+    cursor = list->header;
+    while(cursor) {
+        if(cursor->data == data) {
+            break;
+        }
+        cursor = cursor->next;
+    }
+    return cursor;
+}
+
 uint8_t
 nest_del_node(nest_list *list, nest_node *node)
 {

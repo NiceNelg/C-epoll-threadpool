@@ -70,6 +70,21 @@ uint8_t nest_add_node(nest_list *list, void *data, nest_free_data function,
 
 /******************************************************************************
  *
+ * Function name: nest_find_node
+ * Description:
+ *      根据data的地址在指定链表查找节点位置
+ * Parameter:
+ *   @nest_list      *list
+ *   @void           *data
+ * Return:
+ * 	 node success
+ *   NULL fail
+******************************************************************************/
+nest_node *nest_find_node(nest_list *list, void *data);
+
+
+/******************************************************************************
+ *
  * Function name: nest_del_node
  * Description:
  *      删除指定节点

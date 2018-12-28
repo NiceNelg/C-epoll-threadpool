@@ -1,9 +1,8 @@
 /******************************************************************************
- * Copyright(C),2018-2018,nicenelg@gmail.com
  * FileName: str_operations.h
- * Author:nelg
- * Version:v1.0
- * Date:2018-12-19
+ * Author: nicenelg@gmail.com
+ * Version: v1.0
+ * Date: 2018-12-19
  * Description:
  *      各种字符串的操作
  * Others:
@@ -18,7 +17,6 @@
 #include <stdint.h>
 
 /******************************************************************************
- *
  * Function name: stropt_del_chr
  * Description:
  *      删除字符串中指定的字符
@@ -29,7 +27,6 @@
 void stropt_del_chr(char *string, char ch);
 
 /******************************************************************************
- *
  * Function name: stropt_mencpy
  * Description:
  *      分配新的内存空间并创建字符串，且在字符串最后会添加'\0'结束符

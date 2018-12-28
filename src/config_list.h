@@ -1,11 +1,10 @@
 /******************************************************************************
- * Copyright(C),2018-2018,nicenelg@gmail.com
  * FileName: config_list.h
- * Author:nelg
- * Version:v1.0
- * Date:2018-12-11
- * Description: 
- *  功能：
+ * Author: nicenelg@gmail.com
+ * Version: v1.0
+ * Date: 2018-12-11
+ * Description:
+ *  功能:
  *      1、读取配置文件信息，将配置项放置到全局变量CONFIG中。
  * Others:
  * Function List:
@@ -48,7 +47,6 @@ typedef struct {
 }while(0)
 
 /******************************************************************************
- *
  * Function name: conf_init
  * Description:
  *      初始化配置
@@ -59,7 +57,6 @@ typedef struct {
 int conf_init(void);
 
 /******************************************************************************
- *
  * Function name: conf_create_data
  * Description:
  *      设置一个配置配置
@@ -74,7 +71,6 @@ int conf_init(void);
 uint8_t conf_create_data(conf_data **data, conf_key key, conf_val value);
 
 /******************************************************************************
- *
  * Function name: conf_free_data
  * Description:
  *      释放单个配置数据
@@ -87,7 +83,6 @@ uint8_t conf_create_data(conf_data **data, conf_key key, conf_val value);
 void conf_free_data(void **data);
 
 /******************************************************************************
- *
  * Function name: conf_get_option_val
  * Description:
  *      获取子级配置的值
@@ -101,7 +96,6 @@ void conf_free_data(void **data);
 conf_val conf_get_option_val(conf_key config, conf_key options);
 
 /******************************************************************************
- *
  * Function name: conf_get_options
  * Description:
  *      获取对应顶级配置的所有子级配置项
@@ -114,7 +108,6 @@ conf_val conf_get_option_val(conf_key config, conf_key options);
 nest_list *conf_get_options(conf_key config);
 
 /******************************************************************************
- *
  * Function name: conf_free
  * Description:
  *      释放配置内存

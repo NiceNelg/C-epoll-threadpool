@@ -1,20 +1,18 @@
 /******************************************************************************
  * FileName: epoll_operations.h
- * Author: //作者
- * Version: //版本
- * Date: //完成日期
+ * Author: nicenelg@gmail.com
+ * Version: v1.0.0
+ * Date: 2018-12-28
  * Description:
- *      //用于主要说明此程序文件完成的主要功能                                  
- *      //与其他模块或函数的接口、输出值、取值范围、含义及参数间的控制、顺序、  
- *        独立及依赖关系                                                        
- * Others: //其他内容说明
+ *      epoll基本操作
+ * Others:
  * Function List:
- *      //主要函数列表，每条记录应包含函数名及功能简要说明                      
- * History:
- *      //修改历史记录列表，每条修改记录应包含修改日期、修改者及修改内容简介       
- *      1.Date:                                                                 
- *      2.Author:                                                               
- *      3.Modification:                                                         
- *          1....                                                               
- *          2.                                                                  
+ * Dependent:
 ******************************************************************************/
+
+#ifndef _EPOLL_OPERATIONS_INCLUDED_H_
+#define _EPOLL_OPERATIONS_INCLUDED_H_
+
+#include <>
+
+#endif

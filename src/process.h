@@ -11,9 +11,14 @@
 #ifndef _PROCESS_H_INCLUDED_
 #define _PROCESS_H_INCLUDED_
 
-#include "config_list.h"
 #include <stdint.h>
 #include <unistd.h>
+#include "config_list.h"
+#include "tcp_operations.h"
+#include <sys/epoll.h>
+
+#define MAX_FDS 10240
+
 
 /******************************************************************************
  * Function name: process_start

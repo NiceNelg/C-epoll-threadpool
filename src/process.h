@@ -13,9 +13,10 @@
 
 #include <stdint.h>
 #include <unistd.h>
+#include <sys/resource.h>
+#include <sys/epoll.h>
 #include "config_list.h"
 #include "tcp_operations.h"
-#include <sys/epoll.h>
 
 #define MAX_FDS 10240
 

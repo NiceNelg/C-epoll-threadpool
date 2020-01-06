@@ -1,50 +1,50 @@
-/******************************************************************************
- * FileName: file_operations.h
- * Author: nicenelg@gmail.com
- * Version: v1.0
- * Date: 2018-12-11
- * Description:
- *      Œƒº˛≤Ÿ◊˜∫Ø ˝ºØ
- * Others:
- * Function List:
-******************************************************************************/
-
-#ifndef _FILE_OPERATIONS_H_INCLUDED_
-#define _FILE_OPERATIONS_H_INCLUDED_
-
-#include <stdio.h>
-#include <stdint.h>
-#include <fcntl.h>
-
-/*Œƒº˛–≈œ¢Ω·ππÃÂ*/
-typedef struct {
-    int   fd;
-    char *content;
-}fopt_info;
-
-/******************************************************************************
- * Function name: fopt_get_file_content
- * Description: ≥ı ºªØ≈‰÷√
- * Parameter:
- *   @content   Œƒº˛ƒ⁄»›
- *   @path      Œƒº˛¬∑æ∂
- *   @len       ∂¡»°≥§∂»
- * Return: 
- * 	 0      success  
- *   other  fail
-******************************************************************************/
-int fopt_get_file_content(char *content, char *path, uint64_t len);
-
-/******************************************************************************
- * Function name: fopt_set_nonblock
- * Description:
- *      Ω´Œƒº˛æ‰±˙…Ë÷√≥…∑«◊Ë»˚–Œ Ω
- * Parameter:
- *      @int fd Œƒº˛æ‰±˙
- * Return: 
- * 	 0      success  
- *   other  fail
-******************************************************************************/
-uint8_t fopt_set_nonblock(int fd);
-
+/****************************************************************************** 
+ * FileName: file_operations.h                                                  
+ * Author: nicenelg@gmail.com                                                   
+ * Version: v1.0                                                                
+ * Date: 2018-12-11                                                             
+ * Description:                                                                 
+ *      Êñá‰ª∂Êìç‰ΩúÂáΩÊï∞ÈõÜ                                                          
+ * Others:                                                                      
+ * Function List:                                                               
+******************************************************************************/ 
+                                                                                
+#ifndef _FILE_OPERATIONS_H_INCLUDED_                                            
+#define _FILE_OPERATIONS_H_INCLUDED_                                            
+                                                                                
+#include <stdio.h>                                                              
+#include <stdint.h>                                                             
+#include <fcntl.h>                                                              
+                                                                                
+/*Êñá‰ª∂‰ø°ÊÅØÁªìÊûÑ‰Ωì*/                                                              
+typedef struct {                                                                
+    int   fd;                                                                   
+    char *content;                                                              
+}fopt_info;                                                                     
+                                                                                
+/****************************************************************************** 
+ * Function name: fopt_get_file_content                                         
+ * Description: ÂàùÂßãÂåñÈÖçÁΩÆ                                                      
+ * Parameter:                                                                   
+ *   @content   Êñá‰ª∂ÂÜÖÂÆπ                                                        
+ *   @path      Êñá‰ª∂Ë∑ØÂæÑ                                                        
+ *   @len       ËØªÂèñÈïøÂ∫¶                                                        
+ * Return:                                                                      
+ *   0      success                                                             
+ *   other  fail                                                                
+******************************************************************************/ 
+int fopt_get_file_content(char *content, char *path, uint64_t len);             
+                                                                                
+/****************************************************************************** 
+ * Function name: fopt_set_nonblock                                             
+ * Description:                                                                 
+ *      Â∞ÜÊñá‰ª∂Âè•ÊüÑËÆæÁΩÆÊàêÈùûÈòªÂ°ûÂΩ¢Âºè                                              
+ * Parameter:                                                                   
+ *      @int fd Êñá‰ª∂Âè•ÊüÑ                                                        
+ * Return:                                                                      
+ *   0      success                                                             
+ *   other  fail                                                                
+******************************************************************************/ 
+uint8_t fopt_set_nonblock(int fd);                                              
+                                                                                
 #endif

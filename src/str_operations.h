@@ -1,43 +1,43 @@
-/******************************************************************************
- * FileName: str_operations.h
- * Author: nicenelg@gmail.com
- * Version: v1.0
- * Date: 2018-12-19
- * Description:
- *      ¸÷ÖÖ×Ö·û´®µÄ²Ù×÷
- * Others:
- * Function List:
-******************************************************************************/
-
-#ifndef _STR_OPERATIONS_H_INCLUDED_
-#define _STR_OPERATIONS_H_INCLUDED_
-
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-
-/******************************************************************************
- * Function name: stropt_del_chr
- * Description:
- *      É¾³ı×Ö·û´®ÖĞÖ¸¶¨µÄ×Ö·û
- * Parameter:
- *      @char *string
- *      @char  ch
-******************************************************************************/
-void stropt_del_chr(char *string, char ch);
-
-/******************************************************************************
- * Function name: stropt_mencpy
- * Description:
- *      ·ÖÅäĞÂµÄÄÚ´æ¿Õ¼ä²¢´´½¨×Ö·û´®£¬ÇÒÔÚ×Ö·û´®×îºó»áÌí¼Ó'\0'½áÊø·û
- * Parameter:
- *      @char **string  ¸´ÖÆºóµÄ×Ö·û´®
- *      @char  *start   ĞèÒª¸´ÖÆµÄÆğÊ¼µØÖ·
- *      @char  *end     ĞèÒª¸´ÖÆµÄ½áÊøµØÖ·
- * Return:
- *      0     success
- *      other fail
-******************************************************************************/
-uint8_t stropt_memcpy(char **data, char *start, char *end);
-
+/****************************************************************************** 
+ * FileName: str_operations.h                                                   
+ * Author: nicenelg@gmail.com                                                   
+ * Version: v1.0                                                                
+ * Date: 2018-12-19                                                             
+ * Description:                                                                 
+ *      å„ç§å­—ç¬¦ä¸²çš„æ“ä½œ                                                        
+ * Others:                                                                      
+ * Function List:                                                               
+******************************************************************************/ 
+                                                                                
+#ifndef _STR_OPERATIONS_H_INCLUDED_                                             
+#define _STR_OPERATIONS_H_INCLUDED_                                             
+                                                                                
+#include <stdlib.h>                                                             
+#include <string.h>                                                             
+#include <stdint.h>                                                             
+                                                                                
+/****************************************************************************** 
+ * Function name: stropt_del_chr                                                
+ * Description:                                                                 
+ *      åˆ é™¤å­—ç¬¦ä¸²ä¸­æŒ‡å®šçš„å­—ç¬¦                                                  
+ * Parameter:                                                                   
+ *      @char *string                                                           
+ *      @char  ch                                                               
+******************************************************************************/ 
+void stropt_del_chr(char *string, char ch);                                     
+                                                                                
+/****************************************************************************** 
+ * Function name: stropt_mencpy                                                 
+ * Description:                                                                 
+ *      åˆ†é…æ–°çš„å†…å­˜ç©ºé—´å¹¶åˆ›å»ºå­—ç¬¦ä¸²ï¼Œä¸”åœ¨å­—ç¬¦ä¸²æœ€åä¼šæ·»åŠ '\0'ç»“æŸç¬¦            
+ * Parameter:                                                                   
+ *      @char **string  å¤åˆ¶åçš„å­—ç¬¦ä¸²                                          
+ *      @char  *start   éœ€è¦å¤åˆ¶çš„èµ·å§‹åœ°å€                                      
+ *      @char  *end     éœ€è¦å¤åˆ¶çš„ç»“æŸåœ°å€                                      
+ * Return:                                                                      
+ *      0     success                                                           
+ *      other fail                                                              
+******************************************************************************/ 
+uint8_t stropt_memcpy(char **data, char *start, char *end);                     
+                                                                                
 #endif

@@ -4,7 +4,7 @@
  * Version: v1.0.0
  * Date: 2018-12-21
  * Description:
- *      Ç¶Ì×Ê½Á´±í
+ *     åµŒå¥—å¼é“¾è¡¨
  * Function List: 
 ******************************************************************************/
 #ifndef _NEST_LIST_H_INCLUDED_
@@ -19,7 +19,7 @@ typedef struct nest_ls nest_list;
 
 typedef void (*nest_free_data)(void **data);
 
-/*Á´±í½Úµã*/
+/*é“¾è¡¨èŠ‚ç‚¹*/
 struct nest_nd{
     nest_node        *prev;
     nest_node        *next;
@@ -28,7 +28,7 @@ struct nest_nd{
     nest_free_data    free_data;
 };
 
-/*Á´±í½á¹¹*/
+/*é“¾è¡¨ç»“æ„*/
 struct nest_ls{
     nest_node *header;
     nest_node *last;
@@ -39,7 +39,7 @@ struct nest_ls{
 /******************************************************************************
  * Function name: nest_create_list
  * Description:
- *      ´´½¨Á´±í
+ *      åˆ›å»ºé“¾è¡¨
  * Parameter:
  *   @nest_list **list
  * Return:
@@ -51,12 +51,12 @@ uint8_t nest_create_list(nest_list **list);
 /******************************************************************************
  * Function name: nest_add_node
  * Description:
- *      Ìí¼Ó½Úµã£¬Ä¬ÈÏ¶ÔÁ´±í×îºóµÄ½Úµã²Ù×÷£¬¿ÉÖ¸¶¨½Úµã
+ *      æ·»åŠ èŠ‚ç‚¹ï¼Œé»˜è®¤å¯¹é“¾è¡¨æœ€åçš„èŠ‚ç‚¹æ“ä½œï¼Œå¯æŒ‡å®šèŠ‚ç‚¹
  * Parameter:
  *   @nest_list      *list
  *   @void           *data
  *   @nest_free_node *function
- *   @uint8_t         direction ·½Ïò 0ÏòÇ° 1Ïòºó
+ *   @uint8_t         direction æ–¹å‘ 0å‘å‰ 1å‘å
  *   @nest_node      *postion
  * Return:
  * 	 0 success
@@ -68,7 +68,7 @@ uint8_t nest_add_node(nest_list *list, void *data, nest_free_data function,
 /******************************************************************************
  * Function name: nest_find_node
  * Description:
- *      ¸ù¾İdataµÄµØÖ·ÔÚÖ¸¶¨Á´±í²éÕÒ½ÚµãÎ»ÖÃ
+ *      æ ¹æ®dataçš„åœ°å€åœ¨æŒ‡å®šé“¾è¡¨æŸ¥æ‰¾èŠ‚ç‚¹ä½ç½®
  * Parameter:
  *   @nest_list      *list
  *   @void           *data
@@ -82,7 +82,7 @@ nest_node *nest_find_node(nest_list *list, void *data);
 /******************************************************************************
  * Function name: nest_del_node
  * Description:
- *      É¾³ıÖ¸¶¨½Úµã
+ *      åˆ é™¤æŒ‡å®šèŠ‚ç‚¹
  * Parameter:
  *   @nest_list *list
  *   @nest_node *node
@@ -95,7 +95,7 @@ uint8_t nest_del_node(nest_list *list, nest_node *node);
 /******************************************************************************
  * Function name: nest_reset_cursor
  * Description:
- *      ÖØÖÃÁ´±íÓÎ±ê
+ *      é‡ç½®é“¾è¡¨æ¸¸æ ‡
  * Parameter:
  *   @nest_list *list
  * Return:
@@ -106,7 +106,7 @@ void nest_reset_cursor(nest_list *list);
 /******************************************************************************
  * Function name: nest_foreach_list
  * Description:
- *      ´ÓÓÎ±êÏÂÒ»Î»¿ªÊ¼£¬±éÀúÁ´±í£¨Îª¼æÈİ¶àÏß³Ì³ÌĞò£¬ÔİÎŞµİ¹éÊ½±éÀúÁ´±í·½·¨£©
+ *      ä»æ¸¸æ ‡ä¸‹ä¸€ä½å¼€å§‹ï¼Œéå†é“¾è¡¨ï¼ˆä¸ºå…¼å®¹å¤šçº¿ç¨‹ç¨‹åºï¼Œæš‚æ— é€’å½’å¼éå†é“¾è¡¨æ–¹æ³•ï¼‰
  * Parameter:
  *   @nest_list *list
  * Return:
@@ -117,7 +117,7 @@ nest_node *nest_foreach_list(nest_list *list);
 /******************************************************************************
  * Function name: nest_destroy_list
  * Description:
- *      Ïú»ÙÁ´±í
+ *      é”€æ¯é“¾è¡¨
  * Parameter:
  *   @nest_list *list
  * Return:

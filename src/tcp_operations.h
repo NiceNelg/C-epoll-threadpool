@@ -1,32 +1,32 @@
 /****************************************************************************** 
- * FileName: tcp_operations
- * Author: nicenelg@gmail.com
- * Version: v1.0.0
- * Date: 2018-12-26
- * Description:
- *      TCP≥£”√≤Ÿ◊˜
- * Function List:
-******************************************************************************/
-#ifndef _TCP_OPERATIONS_H_INCLUDED_
-#define _TCP_OPERATIONS_H_INCLUDED_
-
-#include "file_operations.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-
-/******************************************************************************
- * Function name: tcpopt_build_socket
- * Description:
- *      Ω®¡¢TCP¡¨Ω”
- * Parameter:
- *      @char    *port_s    ∂Àø⁄∫≈
- *      @uint8_t  is_block   «∑ÒŒ™◊Ë»˚ Ω£¨0∑Ò£¨1 «
- * Return:
- *      fd  success£¨socket≤Ÿ◊˜æ‰±˙
- *      -1  fail
-******************************************************************************/
-int tcpopt_build_socket(char *port_s, uint8_t is_block);
-
+ * FileName: tcp_operations                                                     
+ * Author: nicenelg@gmail.com                                                   
+ * Version: v1.0.0                                                              
+ * Date: 2018-12-26                                                             
+ * Description:                                                                 
+ *      TCPÂ∏∏Áî®Êìç‰Ωú                                                             
+ * Function List:                                                               
+******************************************************************************/ 
+#ifndef _TCP_OPERATIONS_H_INCLUDED_                                             
+#define _TCP_OPERATIONS_H_INCLUDED_                                             
+                                                                                
+#include "file_operations.h"                                                    
+#include <sys/types.h>                                                          
+#include <sys/wait.h>                                                           
+#include <sys/socket.h>                                                         
+#include <netinet/in.h>                                                         
+                                                                                
+/****************************************************************************** 
+ * Function name: tcpopt_build_socket                                           
+ * Description:                                                                 
+ *      Âª∫Á´ãTCPËøûÊé•                                                             
+ * Parameter:                                                                   
+ *      @char    *port_s    Á´ØÂè£Âè∑                                              
+ *      @uint8_t  is_block  ÊòØÂê¶‰∏∫ÈòªÂ°ûÂºèÔºå0Âê¶Ôºå1ÊòØ                              
+ * Return:                                                                      
+ *      fd  successÔºåsocketÊìç‰ΩúÂè•ÊüÑ                                             
+ *      -1  fail                                                                
+******************************************************************************/ 
+int tcpopt_build_socket(char *port_s, uint8_t is_block);                        
+                                                                                
 #endif

@@ -31,7 +31,7 @@ tcpopt_build_socket(char *port_s, uint8_t is_block)
     }
     /*监听端口*/
     if(listen(fd, 5) < 0) {
-        return -1
+        return -1;
     }
     return fd;
 }
